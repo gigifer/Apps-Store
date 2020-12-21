@@ -45,9 +45,9 @@
                             <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorías</a>
                               <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Educación</a></li>
-                                <li><a class="dropdown-item" href="#">Juegos</a></li>
                                 <li><a class="dropdown-item" href="#">Comida</a></li>
+                                <li><a class="dropdown-item" href="#">Educación</a></li>
+                                <li><a class="dropdown-item" href="#">Juegos</a></li>                              
                                 <li><a class="dropdown-item" href="#">Musica</a></li>
                               </ul>
                             </li>

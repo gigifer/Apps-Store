@@ -14,7 +14,15 @@ class CreateApplicationsTable extends Migration
     public function up()
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->autoIncrement();
+            $table->string('name');
+            $table->string('description');
+            $table->float('price')->unsigned();
+            $table->string('picture');
+            $table->unsignedBigInteger('category_id');
+
+            $table->foreign('category_id')->references('id')->on('categories');
+
             $table->timestamps();
         });
     }
