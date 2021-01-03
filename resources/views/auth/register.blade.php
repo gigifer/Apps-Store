@@ -40,6 +40,17 @@
                         </div>
 
                         <div class="form-group row">
+                          <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de usuario') }}</label>
+                          <div class="btn-group col-md-6" role="group" aria-label="role">
+                            <input type="radio" class="btn-check" name="role" id="btnradio1" value="cliente">
+                            <label class="btn btn-outline-primary" for="btnradio1">Cliente</label>
+
+                            <input type="radio" class="btn-check" name="role" id="btnradio2" value="desarrollador">
+                            <label class="btn btn-outline-primary" for="btnradio2">Desarrollador</label>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

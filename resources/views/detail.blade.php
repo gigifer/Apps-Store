@@ -2,22 +2,25 @@
 
 @section('content')
 
+<div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-7 col-lg-7">
-    <img src="{{ asset('img\mini_puppy.png') }}" class="card-img-top" width="250" height="350" alt="foto">
+    <div class="col-sm-12 col-md-7 col-lg-7 mt-5">
+      <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" width="200" height="300" alt="foto">
     </div>
-    <div class="col-sm-12 col-md-5 col-lg-5">
-      <h5>nombre</h5>
-      <p>descripcion</p>
-  <br>
-    <p>Precio: $ 1000 </p>
-    <br>
-    <div>
-      <a href="#"><button type="button" class="btn">Agregar al carrito</button></a>
-
-    </div>
-
+    <div class="col-sm-12 col-md-5 col-lg-5 mt-5">
+      <h5>{{$aplicacion->name}}</h5>
+      <p>{{$aplicacion->description}}</p>
+      <br>
+      <p>Precio: $ {{$aplicacion->price}} </p>
+      <br>
+      <div>
+        <a href="{{ url('shoppingCart')}}" class="btn btn-success">Comprar</a>
+      </div>
+      <div class="mt-3">
+        <a href="{{ url('/') }}" title="Back"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
+      </div>
     </div>
   </div>
+</div>
 
 @endsection

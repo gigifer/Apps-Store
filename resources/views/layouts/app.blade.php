@@ -17,6 +17,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/acf02b5d89.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,15 +43,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorías</a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Comida</a></li>
-                                <li><a class="dropdown-item" href="#">Educación</a></li>
-                                <li><a class="dropdown-item" href="#">Juegos</a></li>                              
-                                <li><a class="dropdown-item" href="#">Musica</a></li>
-                              </ul>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -61,6 +54,18 @@
                                 </li>
                             @endif
                         @else
+                        @if (auth()->check() && auth()->user()->role == 'cliente')
+
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorías</a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Comida</a></li>
+                              <li><a class="dropdown-item" href="#">Educación</a></li>
+                              <li><a class="dropdown-item" href="#">Juegos</a></li>
+                              <li><a class="dropdown-item" href="#">Musica</a></li>
+                            </ul>
+                          </li>
+                        @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

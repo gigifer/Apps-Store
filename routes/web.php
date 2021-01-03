@@ -17,10 +17,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route:: get('/', 'CatalogeController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/detail', function(){
-  return view('detail');
+Route::get('/detail/{id}', 'CatalogeController@show');
+
+Route::get('/shoppingCart', function(){
+  return view('shoppingCart');
+});
+
+Route::group([
+    'middleware' => 'developer',
+    'prefix' => 'me'
+], function () {
+  Route::resource('application', 'ApplicatiosController');
 });

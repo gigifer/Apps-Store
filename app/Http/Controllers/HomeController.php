@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $aplicaciones = Application::All();
+      if (auth()->check() && auth()->user()->role == 'desarrollador'){
+        return redirect('/me/application');
+      }elseif (auth()->check() && auth()->user()->role == 'cliente') {
+        return view('client');
+      }
+      else{
+        return view('welcome', compact('aplicaciones'));
+      }
     }
 }

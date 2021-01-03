@@ -1,14 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-
   <div class="container">
-    <div class="card border-info mb-3" style="width: 18rem;">
-    <img src="{{ asset('img\mini_puppy.png') }}" class="card-img-top" height="250" alt="foto">
-    <div class="card-body ">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{{ url('detail')}}" class="btn btn-primary">Detalle</a>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
+      @foreach ($aplicaciones as $aplicacion)
+      <div class="col mb-4">
+        <div class="card shadow-sm">
+          <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" alt="..." style="height:220px">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{$aplicacion->name}}</h5>
+            <p class="card-text letra-clara">{{$aplicacion->description}}</p>
+            <p class="letra">${{$aplicacion->price}}</p>
+            <div class="d-flex justify-content-end">
+              <a href="{{ url('detail', $aplicacion->id)}}"><button type="button" class="btn btn-primary">Detalle</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+     @endforeach
     </div>
   </div>
+
 @endsection
