@@ -14,7 +14,7 @@
       <p>Precio: $ {{$aplicacion->price}} </p>
       <br>
       <div>
-        <a href="{{ url('shoppingCart')}}" class="btn btn-success">Comprar</a>
+        <button type="button" id="buy" onclick="guardar()" class="btn btn-success" name="button" value="{{ $aplicacion->id }}">comprar</button>
       </div>
       <div class="mt-3">
         <a href="{{ url('/') }}" title="Back"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
@@ -22,5 +22,27 @@
     </div>
   </div>
 </div>
+
+
+<script type="application/javascript">
+  document.getElementById("buy").addEventListener("click", guardar);
+
+  function guardar() {
+    var data = document.getElementById('buy').value;
+
+    axios({
+      method:'POST',
+      url: '{{ url('/api/buy') }}',
+      data: {id : data}
+    })
+    .then(res => {
+      window.location.href = "{{ url('me/client')}}";
+    });
+  }
+
+</script>
+
+<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 
 @endsection

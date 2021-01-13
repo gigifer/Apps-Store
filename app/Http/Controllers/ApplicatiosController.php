@@ -16,7 +16,7 @@ class ApplicatiosController extends Controller
      */
     public function index()
     {
-  
+
       $id_usuario = auth()->user()->id;
       $aplicaciones = Application::where('user_id', $id_usuario)->latest()->paginate(10);
       return view('index', compact('aplicaciones'));

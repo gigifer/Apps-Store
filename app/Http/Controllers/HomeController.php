@@ -28,7 +28,7 @@ class HomeController extends Controller
       if (auth()->check() && auth()->user()->role == 'desarrollador'){
         return redirect('/me/application');
       }elseif (auth()->check() && auth()->user()->role == 'cliente') {
-        return view('client');
+        return redirect('/me/client');
       }
       else{
         return view('welcome', compact('aplicaciones'));
