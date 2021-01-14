@@ -37,4 +37,4 @@ Route::group([
   Route::resource('client', 'ClientController'); });
 
 Route::post('/api/buy', 'BuyController@store');
-//Route::get('/api/buy', 'BuyController@store')->middleware('client');
+Route::delete('/api/buy/{id}', 'BuyController@destroy');

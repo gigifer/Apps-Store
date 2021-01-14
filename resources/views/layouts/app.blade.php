@@ -21,6 +21,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </head>
 <body>
     <div id="app">
@@ -65,6 +69,14 @@
                               <li><a class="dropdown-item" href="#">Musica</a></li>
                             </ul>
                           </li>
+                          <li>
+                            <a href="/me/client"><i class="fas fa-user-circle text-success" style="font-size:2rem;"></i></a>
+                          </li>
+
+                        @elseif (auth()->check() && auth()->user()->role == 'desarrollador')
+                            <li>
+                              <a href="/me/application"><i class="fas fa-user-circle text-success" style="font-size:2rem;"></i></a>
+                            </li>
                         @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

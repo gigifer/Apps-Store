@@ -37,6 +37,12 @@
     })
     .then(res => {
       window.location.href = "{{ url('me/client')}}";
+      Swal.fire({
+        icon: 'success',
+        title: 'Su compra se realizó con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      })
     });
   }
 

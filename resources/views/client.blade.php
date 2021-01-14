@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" id="contenido">
   <h1 class="text-center">Tus Aplicaciones</h1>
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -21,11 +21,7 @@
               <td>{{$aplicacion->description}}</td>
               <td><img src="{{ asset('storage'). '/' . $aplicacion->picture}}" class="img-thumbnail img-fluid" alt="" width="100"></td>
               <td>
-                <form method="POST" action="{{ url('me/client/' . $aplicacion->id) }}" accept-charset="UTF-8" style="display:inline">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <button type="submit" id="delete" onclick="borrar() "class="btn btn-danger btn-sm" title="Delete" onclick="return confirm(&quot;¿Confirma borrar?&quot;)" value="{{ $aplicacion->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
-                </form>
+                <button type="submit" id="delete" value="{{ $aplicacion->id }}" onclick="deleteConfirmation()" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
               </td>
           </tr>
           @endforeach
@@ -37,16 +33,33 @@
 </div>
 
 <script type="application/javascript">
-  document.getElementById("delete").addEventListener("click", borrar);
+  function deleteConfirmation(){
+    Swal.fire({
+      title: '¿Confirma borrar?',
+      text: "¡Esta acción no se puede revertir!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, borrar!'
+    }).then((result) => {
 
-  function borrar() {
-    var data = document.getElementById('delete').value;
-    console.log(data);
+      if (result.isConfirmed) {
+        var id = document.getElementById('delete').value;
 
-    axios.delete('client' + data)
+        axios.delete('/api/buy/' + id )
+        .then((response) => {
+          if(response.status == 200){
+            Swal.fire(
+              '¡Borrado!',
+              '¡Su app se ha eliminado!',
+              'success')
+          }
+          location.reload();
+        })
+      }
+    })
   }
-
 </script>
 
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 @endsection

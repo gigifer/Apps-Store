@@ -28,11 +28,9 @@
                 <td><img src="{{ asset('storage'). '/' . $aplicacion->picture }}" class="img-thumbnail img-fluid" alt="" width="100"></td>
                 <td>
                   <a class="btn btn-warning btn-sm" href="{{ url('me/application/' . $aplicacion->id . '/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
-                  <form method="POST" action="{{ url('me/application/' . $aplicacion->id) }}" accept-charset="UTF-8" style="display:inline">
-                      {{ method_field('DELETE') }}
-                      {{ csrf_field() }}
-                      <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm(&quot;¿Confirma borrar?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
-                  </form>
+
+                    <button type="submit" id="delete" value="{{ $aplicacion->id }}" onclick="deleteConfirmation()" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
+
                 </td>
             </tr>
           @endforeach
@@ -42,5 +40,35 @@
     {{ $aplicaciones->links() }}
 
 </div>
+
+<script type="application/javascript">
+  function deleteConfirmation(){
+    Swal.fire({
+      title: '¿Confirma borrar?',
+      text: "¡Esta acción no se puede revertir!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, borrar!'
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+        var id = document.getElementById('delete').value;
+
+        axios.delete('/me/application/' + id )
+        .then((response) => {
+          if(response.status == 200){
+            Swal.fire(
+              '¡Borrado!',
+              '¡Su app se ha eliminado!',
+              'success')
+          }
+          location.reload();
+        })
+      }
+    })
+  }
+</script>
 
 @endsection

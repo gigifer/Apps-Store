@@ -72,7 +72,7 @@ class ApplicatiosController extends Controller
       }
       $nuevaAplicacion->save();
 
-      return redirect('me/application')->with('Mensaje', 'Aplicación añadida exitosamente');
+      return redirect('me/application');
 
     }
 
@@ -141,7 +141,7 @@ class ApplicatiosController extends Controller
     public function destroy($id)
     {
       Application::destroy($id);
-
-      return redirect('me/application')->with('flash_message', '¡aplicación borrada!');
+      return response()->json('aplicacion borrada');
+      //return redirect('me/application')->with('flash_message', '¡aplicación borrada!');
     }
 }

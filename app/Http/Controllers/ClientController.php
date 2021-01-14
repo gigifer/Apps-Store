@@ -18,15 +18,8 @@ class ClientController extends Controller
             $join->on('applications.id', '=', 'buys.application_id')
                  ->where('buys.buyer_id', '=', $id_usuario);
         })
-        //->get();
         ->paginate(10);
     return view('client', compact('aplicaciones'));
   }
 
-  public function destroy($id)
-    {
-      Buy::destroy($id);
-
-      return redirect('me/client')->with('flash_message', 'aviso deleted!');
-    }
 }

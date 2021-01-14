@@ -23,4 +23,16 @@ class BuyController extends Controller
     }
 
   }
+
+  public function destroy($id)
+    {
+        Buy::destroy($id);
+        //return response()->json([
+            //'message' => 'paso por aca'
+          //]);
+          //return ('es el controlador');
+          return response()->json('users deleted');
+      }
+      //Buy::destroy($id);
+      //return redirect('me/client');
 }

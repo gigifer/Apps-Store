@@ -47,9 +47,23 @@
     </div>
 
     <br>
-    <input type="submit" class="btn btn-success" value="crear">
+    <input type="submit" class="btn btn-success" onclick="crear()" id="crear" value="crear">
   </form>
   <a href="{{ url('me/application') }}" title="Back"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
 </div>
 
+<script type="application/javascript">
+    document.getElementById("crear").addEventListener("click", crear);
+
+    function crear(){
+      Swal.fire({
+        icon: 'success',
+        title: 'Su compra se realizó con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+</script>
+
+<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 @endsection
