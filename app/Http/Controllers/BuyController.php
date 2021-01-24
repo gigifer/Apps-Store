@@ -17,9 +17,7 @@ class BuyController extends Controller
       $compra->buyer_id = auth()->user()->id;
       $compra->application_id = intval($request->id);
       $compra->save();
-      return response()->json([
-          'message' => 'Nueva compra realizada'
-        ]);
+      return response()->json('Nueva compra realizada');
     }
 
   }
@@ -27,12 +25,8 @@ class BuyController extends Controller
   public function destroy($id)
     {
         Buy::destroy($id);
-        //return response()->json([
-            //'message' => 'paso por aca'
-          //]);
-          //return ('es el controlador');
-          return response()->json('users deleted');
+
+        return response()->json('compra borrada');
       }
-      //Buy::destroy($id);
-      //return redirect('me/client');
+
 }

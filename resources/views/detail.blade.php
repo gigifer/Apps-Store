@@ -8,8 +8,9 @@
       <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" width="200" height="300" alt="foto">
     </div>
     <div class="col-sm-12 col-md-5 col-lg-5 mt-5">
-      <h5>{{$aplicacion->name}}</h5>
-      <p>{{$aplicacion->description}}</p>
+      <h5>Nombre: {{$aplicacion->name}}</h5>
+      <br>
+      <p>Descripción: {{$aplicacion->description}}</p>
       <br>
       <p>Precio: $ {{$aplicacion->price}} </p>
       <br>
@@ -36,14 +37,25 @@
       data: {id : data}
     })
     .then(res => {
-      window.location.href = "{{ url('me/client')}}";
-      Swal.fire({
-        icon: 'success',
-        title: 'Su compra se realizó con éxito',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    });
+      console.log(res)
+      if (res.data == 'Nueva compra realizada') {
+        window.location.href = "{{ url('me/client')}}";
+         Swal.fire({
+           icon: 'success',
+           title: 'Su compra se realizó con éxito',
+           showConfirmButton: false,
+           timer: 1500
+         })
+      }
+      else{
+        Swal.fire('Debe registrarse para comprar')
+          window.location.href = "{{ url('/')}}";
+      }
+    })
+    .catch(function(error) {
+      console.log(error)
+
+    })
   }
 
 </script>

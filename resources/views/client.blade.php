@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" id="contenido">
+<div class="container">
   <h1 class="text-center">Tus Aplicaciones</h1>
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -21,7 +21,8 @@
               <td>{{$aplicacion->description}}</td>
               <td><img src="{{ asset('storage'). '/' . $aplicacion->picture}}" class="img-thumbnail img-fluid" alt="" width="100"></td>
               <td>
-                <button type="submit" id="delete" value="{{ $aplicacion->id }}" onclick="deleteConfirmation()" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
+                <a class="btn btn-success btn-sm" href="{{ url('me/client/' . $aplicacion->id)}}"> Detalle</a>
+                <button type="submit" onclick="deleteConfirmation({{ $aplicacion->id }})" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
               </td>
           </tr>
           @endforeach
@@ -33,7 +34,7 @@
 </div>
 
 <script type="application/javascript">
-  function deleteConfirmation(){
+  function deleteConfirmation(id_to_delete){
     Swal.fire({
       title: '¿Confirma borrar?',
       text: "¡Esta acción no se puede revertir!",
@@ -45,9 +46,7 @@
     }).then((result) => {
 
       if (result.isConfirmed) {
-        var id = document.getElementById('delete').value;
-
-        axios.delete('/api/buy/' + id )
+        axios.delete('/api/buy/' + id_to_delete )
         .then((response) => {
           if(response.status == 200){
             Swal.fire(

@@ -2,8 +2,15 @@
 
 @section('content')
 <div class="container">
+  @if ($mensaje = Session::get('success'))
+    <div class="alert alert-success" role="alert">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <strong>{{ $mensaje }}</strong>
+    </div>
+  @endif
+  
     <h1 class="text-center">Tus Aplicaciones</h1>
-    <a href="{{ url('me/application/create')}}" class="btn btn-success">Agregar Aplicacion</a>
+    <a href="{{ url('me/application/create')}}" class="btn btn-success mb-3">Agregar Aplicacion</a>
 
     <table class="table table-light table-hover">
         <thead class="thead-light">
@@ -27,10 +34,9 @@
                 <td>{{$aplicacion->category_id}}</td>
                 <td><img src="{{ asset('storage'). '/' . $aplicacion->picture }}" class="img-thumbnail img-fluid" alt="" width="100"></td>
                 <td>
+                  <a class="btn btn-success btn-sm" href="{{ url('me/application/' . $aplicacion->id) }}"> Detalle</a>
                   <a class="btn btn-warning btn-sm" href="{{ url('me/application/' . $aplicacion->id . '/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
-
-                    <button type="submit" id="delete" value="{{ $aplicacion->id }}" onclick="deleteConfirmation()" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
-
+                  <button type="submit"  onclick="deleteConfirmation({{ $aplicacion->id }})" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
                 </td>
             </tr>
           @endforeach
@@ -42,7 +48,7 @@
 </div>
 
 <script type="application/javascript">
-  function deleteConfirmation(){
+  function deleteConfirmation(id){
     Swal.fire({
       title: '¿Confirma borrar?',
       text: "¡Esta acción no se puede revertir!",
@@ -54,7 +60,6 @@
     }).then((result) => {
 
       if (result.isConfirmed) {
-        var id = document.getElementById('delete').value;
 
         axios.delete('/me/application/' + id )
         .then((response) => {

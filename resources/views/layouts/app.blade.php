@@ -30,7 +30,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-weight:600; color:blue; font-size:1.7rem;">
                     {{ 'AppsStore' }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,12 +49,12 @@
                         @guest
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
                             </li>
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
                         @else
@@ -63,10 +63,10 @@
                           <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorías</a>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Comida</a></li>
-                              <li><a class="dropdown-item" href="#">Educación</a></li>
-                              <li><a class="dropdown-item" href="#">Juegos</a></li>
-                              <li><a class="dropdown-item" href="#">Musica</a></li>
+                              <li><a class="dropdown-item" href="{{ url('/') }}#comida">Comida</a></li>
+                              <li><a class="dropdown-item" href="{{ url('/') }}#educacion">Educación</a></li>
+                              <li><a class="dropdown-item" href="{{ url('/') }}#juegos">Juegos</a></li>
+                              <li><a class="dropdown-item" href="{{ url('/') }}#musica">Música</a></li>
                             </ul>
                           </li>
                           <li>
@@ -87,7 +87,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Salir') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

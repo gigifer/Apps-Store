@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 
-  <form action="{{url('me/application')}}" class="form-horizontal" method="POST" enctype="multipart/form-data">
-          {{ csrf_field() }}
+  <form action="{{url('me/application/')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+     {{ csrf_field() }}
 
     <div class="form-group">
         <label for="Nombre" class="control-label">Nombre</label>
@@ -20,7 +20,7 @@
 
     <div class="form-group">
         <label for="Precio" class="control-label">Precio</label>
-        <input type="number" min="0" step="any" class="form-control form-control {{$errors->has('Precio')?'is-invalid':''}}" name="Precio" id="Precio" value="{{ isset($applications->price)?number_format((float)$applications->price, 2, '.', ''):number_format((float)old('Precio'), 2, '.', '') }}">
+        <input type="number" min="1" step="any" class="form-control form-control {{$errors->has('Precio')?'is-invalid':''}}" name="Precio" id="Precio" value="{{ isset($applications->price)?number_format((float)$applications->price, 2, '.', ''):number_format((float)old('Precio'), 2, '.', '') }}">
         {!! $errors-> first('Precio','<div class="invalid-feedback">:message</div>') !!}
     </div>
 
@@ -47,22 +47,33 @@
     </div>
 
     <br>
-    <input type="submit" class="btn btn-success" onclick="crear()" id="crear" value="crear">
+    <input type="submit" class="btn btn-success mb-2" value="crear">
   </form>
   <a href="{{ url('me/application') }}" title="Back"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
 </div>
 
 <script type="application/javascript">
-    document.getElementById("crear").addEventListener("click", crear);
+  //document.getElementById("data").addEventListener("click", submitForm);
 
-    function crear(){
-      Swal.fire({
-        icon: 'success',
-        title: 'Su compra se realizó con éxito',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
+  //function submitForm(){
+    //var $request = new FormData(data);
+
+    //axios({
+        //method:'POST',
+        //url: '{{ url('me/application') }}',
+        //data: $request
+      //})
+      //.then((response) => {
+        //window.location.href = "{{ url('me/application')}}";
+        //Swal.fire({
+          //icon: 'success',
+          //title: 'Su applicacion se creó con éxito',
+          //showConfirmButton: false,
+          //timer: 1500
+        //})
+      //});
+  //}
+
 </script>
 
 <script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

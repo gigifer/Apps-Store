@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Application;
 use App\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ApplicatiosController extends Controller
 {
@@ -19,6 +20,27 @@ class ApplicatiosController extends Controller
 
       $id_usuario = auth()->user()->id;
       $aplicaciones = Application::where('user_id', $id_usuario)->latest()->paginate(10);
+
+      $categoria = DB::table('categories')
+          ->join('applications', function ($join) use($id_usuario){
+              $join->on('applications.category_id', '=', 'categories.id')
+                  ->where('applications.user_id', '=', $id_usuario);
+            })->get();
+
+      //foreach ($aplicaciones as $aplicacion) {
+        //$id_aplicacion = $aplicacion->id;
+        //$nombre_categoria = Category::where('categories.id', $id_aplicacion);
+        //return $nombre_categoria;
+      //}
+
+      //dd($nombre_categoria);
+
+      //$categoria = DB::table('applications')
+          //->join('categories', function ($join) use($id_usuario){
+              //$join->on('applications.category_id', '=', 'categories.id')
+                  //->where('applications.user_id', '=', $id_usuario);
+            //})->first();
+      //dd($aplicaciones);
       return view('index', compact('aplicaciones'));
 
     }
@@ -33,7 +55,7 @@ class ApplicatiosController extends Controller
         $categorias = Category::all();
 
         return view('create', compact('categorias'));
-        //return redirect('/me/application/create');
+
     }
 
     /**
@@ -44,17 +66,17 @@ class ApplicatiosController extends Controller
      */
     public function store(Request $request)
     {
-      //Validación
+      
       $validacion = [
           'Nombre' => 'required|string|max:200',
-          'Descripcion' => 'string|max:200',
+          'Descripcion' => 'required|string|max:200',
           'Precio' => 'required',
           'Foto' => 'required|max:10000|mimes:jpeg,png,jpg,bmp'
       ];
 
       $mensaje = [
           "required" => 'El campo :attribute es requerido',
-          "string" => 'El campo :attribute debe ser un string',
+          "string" => 'El campo :attribute debe ser un texto',
           "max" => 'El campo :attribute no debe superar los :max caracteres',
           "mimes" => 'La fotografía debe ser formato jpeg, png, jpg o bmp'
       ];
@@ -72,8 +94,7 @@ class ApplicatiosController extends Controller
       }
       $nuevaAplicacion->save();
 
-      return redirect('me/application');
-
+      return redirect('me/application')->with('success', 'Aplicación creada exitosamente');
     }
 
     /**
@@ -84,7 +105,16 @@ class ApplicatiosController extends Controller
      */
     public function show($id)
     {
-        //
+      $categoria = DB::table('applications')
+          ->join('categories', function ($join) use($id){
+              $join->on('applications.category_id', '=', 'categories.id')
+                  ->where('applications.id', '=', $id);
+            })->first();
+
+      $nombre_categoria = $categoria->name;
+      $aplicacion = Application::findOrFail($id);
+
+      return view('dev_detail', compact('aplicacion', 'nombre_categoria'));
     }
 
     /**
@@ -95,9 +125,18 @@ class ApplicatiosController extends Controller
      */
     public function edit($id)
     {
-      $categorias = Category::all();
+
+      $categoria = DB::table('applications')
+          ->join('categories', function ($join) use($id){
+              $join->on('applications.category_id', '=', 'categories.id')
+                  ->where('applications.id', '=', $id);
+            })->get();
+      $resultado = json_decode($categoria, true);
+      $nombre_categoria =  $resultado[0]['name'];
       $aplicacion = Application::findOrFail($id);
-      return view('edit', compact('aplicacion', 'categorias'));
+
+      return view('edit', compact('aplicacion', 'nombre_categoria'));
+
     }
 
     /**
@@ -109,27 +148,31 @@ class ApplicatiosController extends Controller
      */
     public function update(Request $request, $id)
     {
-      //Guarda en la variable todos los datos del formulario, excepto el token (csrf_field) y el método (method_field).
-        $datosNuevos = request()->except(['_token', '_method']);
+      $validacion = [
+          'Description' => 'required|string|max:200',
+          'Price' => 'required',
+          'Picture' => 'required|max:10000|mimes:jpeg,png,jpg,bmp'
+      ];
 
-        if ($request->hasFile('picture')) {
+      $mensaje = [
+          "required" => 'El campo :attribute es requerido',
+          "string" => 'El campo :attribute debe ser un texto',
+          "max" => 'El campo :attribute no debe superar los :max caracteres',
+          "mimes" => 'La fotografía debe ser formato jpeg, png, jpg o bmp'
+      ];
 
-            //Encontrar id y borrar fotografía anterior.
-            $aplicacion = Application::findOrFail($id);
-            Storage::delete('public/' . $aplicacion->picture);
+      $datosValidados = $request->validate($validacion, $mensaje);
 
-            //Guardar fotografía nueva.
-            //$datosNuevos['picture'] = $request->file('foto')->store('uploads', 'public');
-            $datosNuevos['picture'] = $request->file('picture')->store('uploads', 'public');
-            return $datosNuevos;
-        }
+        if ($request->hasFile('Picture')) {
+          //Encontrar id y borrar fotografía anterior.
+          $aplicacion = Application::findOrFail($id);
+          Storage::delete('public/' . $aplicacion->picture);
 
+          $datosValidados['picture'] = $request->file('Picture')->store('uploads', 'public');
+          }
 
-        //Encontrar aplicacion por id.
-        //Application::where('id', '=', $id)->update($datosNuevos);
-
-        //Si queremos volver a la lista de aplicaciones
-        return redirect('me/application')->with('Mensaje', 'Aplicacion modificada exitosamente');
+          Application::where('id', '=', $id)->update($datosValidados);
+          return redirect('me/application')->with('success', 'Aplicación modificada exitosamente');
     }
 
     /**
@@ -141,7 +184,7 @@ class ApplicatiosController extends Controller
     public function destroy($id)
     {
       Application::destroy($id);
-      return response()->json('aplicacion borrada');
-      //return redirect('me/application')->with('flash_message', '¡aplicación borrada!');
+      return response()->json('response');
+
     }
 }
