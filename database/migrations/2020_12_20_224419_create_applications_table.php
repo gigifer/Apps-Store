@@ -21,6 +21,7 @@ class CreateApplicationsTable extends Migration
             $table->string('picture');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
+            $table->boolean('deleted')->default(0);
 
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('user_id')->references('id')->on('users');

@@ -52,29 +52,4 @@
   <a href="{{ url('me/application') }}" title="Back"><button class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</button></a>
 </div>
 
-<script type="application/javascript">
-  //document.getElementById("data").addEventListener("click", submitForm);
-
-  //function submitForm(){
-    //var $request = new FormData(data);
-
-    //axios({
-        //method:'POST',
-        //url: '{{ url('me/application') }}',
-        //data: $request
-      //})
-      //.then((response) => {
-        //window.location.href = "{{ url('me/application')}}";
-        //Swal.fire({
-          //icon: 'success',
-          //title: 'Su applicacion se creó con éxito',
-          //showConfirmButton: false,
-          //timer: 1500
-        //})
-      //});
-  //}
-
-</script>
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 @endsection

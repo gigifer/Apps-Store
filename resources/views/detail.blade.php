@@ -48,7 +48,7 @@
          })
       }
       else{
-        Swal.fire('Debe registrarse para comprar')
+        Swal.fire('Debe ser cliente para comprar')
           window.location.href = "{{ url('/')}}";
       }
     })

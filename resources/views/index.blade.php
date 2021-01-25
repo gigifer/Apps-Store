@@ -8,7 +8,6 @@
       <strong>{{ $mensaje }}</strong>
     </div>
   @endif
-  
     <h1 class="text-center">Tus Aplicaciones</h1>
     <a href="{{ url('me/application/create')}}" class="btn btn-success mb-3">Agregar Aplicacion</a>
 
@@ -26,6 +25,7 @@
         </thead>
         <tbody>
             @foreach ($aplicaciones as $aplicacion)
+              @if ($aplicacion->deleted == 0)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$aplicacion->name}}</td>
@@ -39,6 +39,7 @@
                   <button type="submit"  onclick="deleteConfirmation({{ $aplicacion->id }})" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
                 </td>
             </tr>
+            @endif
           @endforeach
         </tbody>
     </table>
@@ -56,7 +57,8 @@
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: '¡Si, borrar!'
+      confirmButtonText: '¡Si, borrar!',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
 
       if (result.isConfirmed) {

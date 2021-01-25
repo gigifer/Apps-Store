@@ -41,6 +41,7 @@ class ApplicatiosController extends Controller
                   //->where('applications.user_id', '=', $id_usuario);
             //})->first();
       //dd($aplicaciones);
+
       return view('index', compact('aplicaciones'));
 
     }
@@ -66,7 +67,7 @@ class ApplicatiosController extends Controller
      */
     public function store(Request $request)
     {
-      
+
       $validacion = [
           'Nombre' => 'required|string|max:200',
           'Descripcion' => 'required|string|max:200',
@@ -183,8 +184,10 @@ class ApplicatiosController extends Controller
      */
     public function destroy($id)
     {
-      Application::destroy($id);
+    
+      $aplicacion = Application::findOrFail($id);
+      $aplicacion->deleted = 1;
+      $aplicacion->save();
       return response()->json('response');
-
     }
 }
