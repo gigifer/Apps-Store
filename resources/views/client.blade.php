@@ -6,21 +6,21 @@
     <table class="table table-light table-hover">
         <thead class="thead-light">
           <tr>
-            <th>#</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Foto</th>
-            <th>Acción</th>
+            <th style="width: 10%">#</th>
+            <th style="width: 20%">Nombre</th>
+            <th style="width: 30%">Descripcion</th>
+            <th style="width: 20%">Foto</th>
+            <th style="width: 20%">Acción</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($aplicaciones as $aplicacion)
           <tr>
-            <td>{{$loop->iteration}}</td>
-              <td>{{$aplicacion->name}}</td>
-              <td>{{$aplicacion->description}}</td>
-              <td><img src="{{ asset('storage'). '/' . $aplicacion->picture}}" class="img-thumbnail img-fluid" alt="" width="100"></td>
-              <td>
+            <td style="width: 10%">{{$loop->iteration}}</td>
+              <td style="width: 20%">{{$aplicacion->name}}</td>
+              <td style="width: 30%">{{$aplicacion->description}}</td>
+              <td style="width: 20%"><img src="{{ asset('storage'). '/' . $aplicacion->picture}}" class="img-thumbnail img-fluid" alt="" width="100"></td>
+              <td style="width: 20%">
                 <a class="btn btn-success btn-sm" href="{{ url('me/client/' . $aplicacion->id)}}"> Detalle</a>
                 <button type="submit" onclick="deleteConfirmation({{ $aplicacion->id }})" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>
               </td>

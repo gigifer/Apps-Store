@@ -21,27 +21,6 @@ class ApplicatiosController extends Controller
       $id_usuario = auth()->user()->id;
       $aplicaciones = Application::where('user_id', $id_usuario)->latest()->paginate(10);
 
-      $categoria = DB::table('categories')
-          ->join('applications', function ($join) use($id_usuario){
-              $join->on('applications.category_id', '=', 'categories.id')
-                  ->where('applications.user_id', '=', $id_usuario);
-            })->get();
-
-      //foreach ($aplicaciones as $aplicacion) {
-        //$id_aplicacion = $aplicacion->id;
-        //$nombre_categoria = Category::where('categories.id', $id_aplicacion);
-        //return $nombre_categoria;
-      //}
-
-      //dd($nombre_categoria);
-
-      //$categoria = DB::table('applications')
-          //->join('categories', function ($join) use($id_usuario){
-              //$join->on('applications.category_id', '=', 'categories.id')
-                  //->where('applications.user_id', '=', $id_usuario);
-            //})->first();
-      //dd($aplicaciones);
-
       return view('index', compact('aplicaciones'));
 
     }
@@ -69,7 +48,7 @@ class ApplicatiosController extends Controller
     {
 
       $validacion = [
-          'Nombre' => 'required|string|max:200',
+          'Nombre' => 'required|string|max:100',
           'Descripcion' => 'required|string|max:200',
           'Precio' => 'required',
           'Foto' => 'required|max:10000|mimes:jpeg,png,jpg,bmp'
@@ -184,7 +163,7 @@ class ApplicatiosController extends Controller
      */
     public function destroy($id)
     {
-    
+
       $aplicacion = Application::findOrFail($id);
       $aplicacion->deleted = 1;
       $aplicacion->save();

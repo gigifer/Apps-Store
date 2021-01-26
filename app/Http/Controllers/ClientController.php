@@ -30,8 +30,17 @@ class ClientController extends Controller
         $join->on('applications.id', '=', 'buys.application_id')
              ->where('buys.id', '=', $id);
       })->first();
+    $aplicacion_id =  $aplicacion->application_id;
 
-    return view('client_detail', compact('aplicacion'));
+    $categoria = DB::table('applications')
+        ->join('categories', function ($join) use($aplicacion_id){
+            $join->on('applications.category_id', '=', 'categories.id')
+                ->where('applications.id', '=', $aplicacion_id);
+          })->get();
+    $resultado = json_decode($categoria, true);
+    $nombre_categoria =  $resultado[0]['name'];
+
+    return view('client_detail', compact('aplicacion', 'nombre_categoria'));
   }
 
 }

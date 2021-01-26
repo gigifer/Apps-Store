@@ -14,26 +14,24 @@
     <table class="table table-light table-hover">
         <thead class="thead-light">
             <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Precio</th>
-                <th>Categoria</th>
-                <th>Foto</th>
-                <th>Acción</th>
+                <th style="width: 0.5%">#</th>
+                <th style="width: 15%">Nombre</th>
+                <th style="width: 30%">Descripcion</th>
+                <th style="width: 15%">Precio</th>
+                <th style="width: 15%">Foto</th>
+                <th style="width: 20%">Acción</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($aplicaciones as $aplicacion)
               @if ($aplicacion->deleted == 0)
             <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$aplicacion->name}}</td>
-                <td>{{$aplicacion->description}}</td>
-                <td><?php echo number_format((float) $aplicacion['price'], 2, '.', ''); ?></td>
-                <td>{{$aplicacion->category_id}}</td>
-                <td><img src="{{ asset('storage'). '/' . $aplicacion->picture }}" class="img-thumbnail img-fluid" alt="" width="100"></td>
-                <td>
+                <td style="width: 0.5%">{{$loop->iteration}}</td>
+                <td style="width: 15%">{{$aplicacion->name}}</td>
+                <td style="width: 30%">{{$aplicacion->description}}</td>
+                <td style="width: 15%"><?php echo number_format((float) $aplicacion['price'], 2, '.', ''); ?></td>
+                <td style="width: 15%"><img src="{{ asset('storage'). '/' . $aplicacion->picture }}" class="img-thumbnail img-fluid" alt="" width="100"></td>
+                <td style="width: 20%">
                   <a class="btn btn-success btn-sm" href="{{ url('me/application/' . $aplicacion->id) }}"> Detalle</a>
                   <a class="btn btn-warning btn-sm" href="{{ url('me/application/' . $aplicacion->id . '/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
                   <button type="submit"  onclick="deleteConfirmation({{ $aplicacion->id }})" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i> Borrar</button>

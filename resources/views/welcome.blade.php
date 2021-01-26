@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-  <h1 id="educacion" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Comida</h1>
+  <h1 id="comida" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Comida</h1>
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
     @foreach ($apps_comida as $aplicacion)
       @if ($aplicacion->deleted == 0)
