@@ -17,6 +17,7 @@ class BuyController extends Controller
       $compra->buyer_id = auth()->user()->id;
       $compra->application_id = intval($request->id);
       $compra->save();
+
       return response()->json('Nueva compra realizada');
     }
 

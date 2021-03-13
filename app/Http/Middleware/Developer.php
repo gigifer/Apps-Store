@@ -15,8 +15,9 @@ class Developer
      */
     public function handle($request, Closure $next)
     {
-      if (auth()->check() && auth()->user()->role == 'desarrollador')
-      return $next($request);
+      if (auth()->check() && auth()->user()->role == 'desarrollador'){
+        return $next($request);
+      }
 
        return redirect('/');
 

@@ -5,8 +5,8 @@
 
   <h1 id="comida" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Comida</h1>
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    @foreach ($apps_comida as $aplicacion)
-      @if ($aplicacion->deleted == 0)
+    @foreach ($aplicaciones as $aplicacion)
+      @if ($aplicacion->category_id == 1 and $aplicacion->deleted == 0)
         <div class="col mb-4">
           <div class="card shadow-sm">
             <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" alt="..." style="height:220px">
@@ -26,8 +26,8 @@
 
   <h1 id="educacion" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Educación</h1>
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    @foreach ($apps_educacion as $aplicacion)
-      @if ($aplicacion->deleted == 0)
+    @foreach ($aplicaciones as $aplicacion)
+      @if ($aplicacion->category_id == 2 and $aplicacion->deleted == 0)
         <div class="col mb-4">
           <div class="card shadow-sm">
             <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" alt="..." style="height:220px">
@@ -47,8 +47,8 @@
 
   <h1 id="juegos" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Juegos</h1>
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    @foreach ($apps_juegos as $aplicacion)
-      @if ($aplicacion->deleted == 0)
+    @foreach ($aplicaciones as $aplicacion)
+      @if ($aplicacion->category_id == 3 and $aplicacion->deleted == 0)
         <div class="col mb-4">
           <div class="card shadow-sm">
             <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" alt="..." style="height:220px">
@@ -68,8 +68,8 @@
 
   <h1 id="musica" class="text-center" style="color:blue; font-size:2rem;">Aplicaciones de Música</h1>
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    @foreach ($apps_musica as $aplicacion)
-      @if ($aplicacion->deleted == 0)
+    @foreach ($aplicaciones as $aplicacion)
+      @if ($aplicacion->category_id == 4 and $aplicacion->deleted == 0)
         <div class="col mb-4">
           <div class="card shadow-sm">
             <img src="{{ asset('storage').'/'.$aplicacion->picture}}" class="card-img-top" alt="..." style="height:220px">

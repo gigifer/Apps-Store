@@ -30,7 +30,7 @@
 
       <div class="form-group">
           <label for="id_categoria" class="control-label">Categoria</label>
-          <input type="text" class="form-control" name="id_categoria" id="id_categoria" value="{{ $nombre_categoria}}">
+          <input type="text" class="form-control" name="id_categoria" id="id_categoria" value="{{ $aplicacion->category->name}}">
       </div>
 
       <div class="form-group">

@@ -14,7 +14,7 @@
         <br>
         <p>Precio: $ {{$aplicacion->price}} </p>
         <br>
-        <p>Categoría: {{$nombre_categoria}}</p>
+        <p>Categoría: {{$aplicacion->category->name}}</p>
         <div>
           <a class="btn btn-warning" href="{{ url('me/application/' . $aplicacion->id . '/edit') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</a>
         </div>

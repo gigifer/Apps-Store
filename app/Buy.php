@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Buy extends Model
 {
-  public function usuario(){
-    return $this->belongsTo(User::class,'buyer_id');
+  public function buyer(){
+    return $this->belongsTo(User::class);
   }
 
-  public function aplicaciones(){
-    return $this->hasMany(Application::class,'application_id');
+  public function application(){
+    return $this->belongsTo(Application::class);
   }
 
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Application;
 use App\Category;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
 
 class ApplicatiosController extends Controller
 {
@@ -85,16 +85,16 @@ class ApplicatiosController extends Controller
      */
     public function show($id)
     {
-      $categoria = DB::table('applications')
-          ->join('categories', function ($join) use($id){
-              $join->on('applications.category_id', '=', 'categories.id')
-                  ->where('applications.id', '=', $id);
-            })->first();
+      //$categoria = DB::table('applications')
+          //->join('categories', function ($join) use($id){
+              //$join->on('applications.category_id', '=', 'categories.id')
+                  //->where('applications.id', '=', $id);
+            //})->first();
 
-      $nombre_categoria = $categoria->name;
+      //$nombre_categoria = $categoria->name;
       $aplicacion = Application::findOrFail($id);
 
-      return view('dev_detail', compact('aplicacion', 'nombre_categoria'));
+      return view('dev_detail', compact('aplicacion'));
     }
 
     /**
@@ -106,16 +106,16 @@ class ApplicatiosController extends Controller
     public function edit($id)
     {
 
-      $categoria = DB::table('applications')
-          ->join('categories', function ($join) use($id){
-              $join->on('applications.category_id', '=', 'categories.id')
-                  ->where('applications.id', '=', $id);
-            })->get();
-      $resultado = json_decode($categoria, true);
-      $nombre_categoria =  $resultado[0]['name'];
+      //$categoria = DB::table('applications')
+          //->join('categories', function ($join) use($id){
+              //$join->on('applications.category_id', '=', 'categories.id')
+                  //->where('applications.id', '=', $id);
+            //})->get();
+      //$resultado = json_decode($categoria, true);
+      //$nombre_categoria =  $resultado[0]['name'];
       $aplicacion = Application::findOrFail($id);
 
-      return view('edit', compact('aplicacion', 'nombre_categoria'));
+      return view('edit', compact('aplicacion'));
 
     }
 

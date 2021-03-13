@@ -15,9 +15,10 @@ class Client
      */
     public function handle($request, Closure $next)
     {
-      if (auth()->check() && auth()->user()->role == 'cliente')
-      return $next($request);
+      if (auth()->check() && auth()->user()->role == 'cliente'){
+        return $next($request);
+      }
 
-      return redirect('login');    
+      return redirect('login');
     }
 }
