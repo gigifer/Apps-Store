@@ -106,13 +106,6 @@ class ApplicatiosController extends Controller
     public function edit($id)
     {
 
-      //$categoria = DB::table('applications')
-          //->join('categories', function ($join) use($id){
-              //$join->on('applications.category_id', '=', 'categories.id')
-                  //->where('applications.id', '=', $id);
-            //})->get();
-      //$resultado = json_decode($categoria, true);
-      //$nombre_categoria =  $resultado[0]['name'];
       $aplicacion = Application::findOrFail($id);
 
       return view('edit', compact('aplicacion'));
